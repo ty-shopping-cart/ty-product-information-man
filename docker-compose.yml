@@ -1,0 +1,43 @@
+version: '3'
+services:
+  #zookeeper:
+  #  image: wurstmeister/zookeeper
+  #  container_name: zookeeper
+  #  restart: always
+  #  ports:
+  #    - 2181:2181
+
+  #kafka:
+  #  image: wurstmeister/kafka
+  #  container_name: kafka
+  #  restart: always
+  #  ports:
+  #    - 9092:9092
+  #  depends_on:
+  #    - zookeeper
+  #  links:
+  #    - zookeeper:zookeeper
+  #  environment:
+  #    KAFKA_ADVERTISED_HOST_NAME: kafka
+  #    KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  #    KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+
+  app:
+    container_name: product-information-man
+    build: .
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/product_information
+  db:
+    image: postgres
+    container_name: product_db
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pass123
+      - POSTGRES_DB=product_information
