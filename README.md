@@ -3,6 +3,7 @@ This microservice has product information. Consume AddedProductBySupplier and Up
 * Created product 
 * Updated product
 * Produce UserNotificationMessage topic 
+* Rest call shopping-cart fetch users with products in cart
 
 
 ## Tech Stack
